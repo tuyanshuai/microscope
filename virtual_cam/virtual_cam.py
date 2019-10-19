@@ -28,7 +28,6 @@ def image():
     abs_file_path = os.path.join(script_dir, rel_path)
     im = Image.open(abs_file_path)
     im = im.rotate(math.fmod(time.time()*5,360))
-    time.sleep(0.1)
     return serve_pil_image(im)
 
 
