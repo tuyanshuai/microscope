@@ -2,8 +2,7 @@
 microscope
 ===============================
 
-m
-
+smart microscope
 
 Quickstart
 ----------
@@ -14,8 +13,8 @@ Run the following commands to bootstrap your environment ::
     cd microscope
     pip install -r requirements/dev.txt
     cp .env.example .env
-    npm install
-    npm start  # run the webpack dev server and flask server using concurrently
+    npm install 
+    npm run-script build 
 
 You will see a pretty welcome screen.
 
@@ -90,52 +89,3 @@ You can do this after ``flask db migrate`` by running the following commands ::
 Make sure folder `migrations/versions` is not empty.
 
 
-Docker
-------
-
-This app can be run completely using ``Docker`` and ``docker-compose``. Before starting, make sure to create a new copy of ``.env.example`` called ``.env``. You will need to start the development version of the app at least once before running other Docker commands, as starting the dev app bootstraps a necessary file, ``webpack/manifest.json``.
-
-There are three main services:
-
-To run the development version of the app ::
-
-    docker-compose up flask-dev
-
-To run the production version of the app ::
-
-    docker-compose up flask-prod
-
-The list of ``environment:`` variables in the ``docker-compose.yml`` file takes precedence over any variables specified in ``.env``.
-
-To run any commands using the ``Flask CLI`` ::
-
-    docker-compose run --rm manage <<COMMAND>>
-
-Therefore, to initialize a database you would run ::
-
-    docker-compose run --rm manage db init
-
-A docker volume ``node-modules`` is created to store NPM packages and is reused across the dev and prod versions of the application. For the purposes of DB testing with ``sqlite``, the file ``dev.db`` is mounted to all containers. This volume mount should be removed from ``docker-compose.yml`` if a production DB server is used.
-
-
-Asset Management
-----------------
-
-Files placed inside the ``assets`` directory and its subdirectories
-(excluding ``js`` and ``css``) will be copied by webpack's
-``file-loader`` into the ``static/build`` directory, with hashes of
-their contents appended to their names.  For instance, if you have the
-file ``assets/img/favicon.ico``, this will get copied into something
-like
-``static/build/img/favicon.fec40b1d14528bf9179da3b6b78079ad.ico``.
-You can then put this line into your header::
-
-    <link rel="shortcut icon" href="{{asset_url_for('img/favicon.ico') }}">
-
-to refer to it inside your HTML page.  If all of your static files are
-managed this way, then their filenames will change whenever their
-contents do, and you can ask Flask to tell web browsers that they
-should cache all your assets forever by including the following line
-in your ``settings.py``::
-
-    SEND_FILE_MAX_AGE_DEFAULT = 31556926  # one year
