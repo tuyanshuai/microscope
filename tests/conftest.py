@@ -6,8 +6,8 @@ import logging
 import pytest
 from webtest import TestApp
 
-from microscope.app import create_app
-from microscope.database import db as _db
+from webviewer.app import create_app
+from webviewer.database import db as _db
 
 from .factories import UserFactory
 

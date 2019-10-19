@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Test forms."""
 
-from microscope.public.forms import LoginForm
-from microscope.user.forms import RegisterForm
+from webviewer.public.forms import LoginForm
+from webviewer.user.forms import RegisterForm
 
 
 class TestRegisterForm:

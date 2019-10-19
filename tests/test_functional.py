@@ -5,7 +5,7 @@ See: http://webtest.readthedocs.org/
 """
 from flask import url_for
 
-from microscope.user.models import User
+from webviewer.user.models import User
 
 from .factories import UserFactory
 

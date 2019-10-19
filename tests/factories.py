@@ -3,8 +3,8 @@
 from factory import PostGenerationMethodCall, Sequence
 from factory.alchemy import SQLAlchemyModelFactory
 
-from microscope.database import db
-from microscope.user.models import User
+from webviewer.database import db
+from webviewer.user.models import User
 
 
 class BaseFactory(SQLAlchemyModelFactory):

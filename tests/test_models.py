@@ -4,7 +4,7 @@ import datetime as dt
 
 import pytest
 
-from microscope.user.models import Role, User
+from webviewer.user.models import Role, User
 
 from .factories import UserFactory
 
