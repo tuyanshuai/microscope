@@ -26,6 +26,7 @@ To deploy::
     export FLASK_ENV=production
     export FLASK_DEBUG=0   
     # install apache/ningx
+    # TODO test the app by apache.nginx
 
 Shell
 -----
@@ -37,7 +38,7 @@ To open the interactive shell, run ::
 By default, you will have access to the flask ``app``.
 
 
-Running Tests/Linter
+Running Tests
 --------------------
 
 To run all tests, run ::

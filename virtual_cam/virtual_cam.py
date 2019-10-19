@@ -27,7 +27,8 @@ def image():
     rel_path = "../virtual_cam/image.jpg"
     abs_file_path = os.path.join(script_dir, rel_path)
     im = Image.open(abs_file_path)
-    im = im.rotate(math.fmod(time.time(),360))
+    im = im.rotate(math.fmod(time.time()*5,360))
+    time.sleep(0.1)
     return serve_pil_image(im)
 
 
@@ -35,3 +36,14 @@ def image():
 def home():
     return 'home'
 
+@blueprint.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
