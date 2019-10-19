@@ -15,8 +15,9 @@ class Photo(Model):
     """ The photo/picture mode"""
     __tablename__ = "photos"
     photo_id = Column(db.Integer, unique = True, primary_key = True)
-    photo_path = Column(db.String(2048), unique=True,  nullable=False)    
-    owner_id =  relationship("User", backref="photos")  # refer to the user_id
+    photo_path = Column(db.String(2048), unique=True,  nullable=False)
+    user_id = reference_col("users", nullable=True)
+    user = relationship("User", backref="photos")
 
     def __init__(self, name, **kwargs):
         """Create instance."""

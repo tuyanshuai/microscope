@@ -21,5 +21,4 @@ pep8-naming==0.8.2
 #virtualcam
 Pillow==6.1.0
 
-# for bootstrap macro
-Bootstrap-Flask==1.1.0
+#Bootstrap-Flask==1.1.0

@@ -36,9 +36,6 @@ nosetests.xml
 output/*.html
 output/*/index.html
 
-# Sphinx
-docs/_build
-
 .webassets-cache
 
 # Virtualenvs
@@ -47,12 +44,3 @@ docs/_build
 # npm
 /node_modules/
 
-# webpack-built files
-#/microscope/static/build/
-#/microscope/webpack/manifest.json
-
-# Configuration
-#.env
-
-# Development database
-#*.db

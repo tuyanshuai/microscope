@@ -37,3 +37,6 @@ Flask-DebugToolbar==0.10.1
 
 # Environment variable parsing
 environs==6.0.0
+
+# pagination
+flask-paginate==0.5.3

@@ -2,11 +2,48 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<!--<div class="container">-->
+<!--    <h1 class="mt-5">Photoes</h1>-->
+
+<!--  <div class="col-md-12">-->
+
+<!--    <div id="mdb-lightbox-ui">-->
+<!--        <div class="mdb-lightbox">-->
+<!--               {% for photo in photos %}-->
+<!--                <figure class="col-md-4">-->
+<!--                    <a href="{{ photo.href }}" data-size="1600x1067">-->
+<!--                       <img alt="picture" src="{{ photo.src }}" class="img-fluid">-->
+<!--                    </a>-->
+<!--                </figure>-->
+<!--               {% endfor %}-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
 <div class="container">
-    <h1 class="mt-5">Photoes</h1>
-    <div class="row">
-      
-    </div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ loop.index + (page - 1) * per_page }}</td>
+              <td>{{ user }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {{ pagination.links }}
 </div>
+
 {% endblock %}
 
