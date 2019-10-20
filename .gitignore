@@ -36,6 +36,8 @@ nosetests.xml
 output/*.html
 output/*/index.html
 
+virtual_cam/static/*.jpg
+
 .webassets-cache
 
 # Virtualenvs
