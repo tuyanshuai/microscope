@@ -14,7 +14,7 @@ Run the following commands to bootstrap your environment ::
     git clone https://github.com/tuyanshuai/microscope
     cd microscope
     pip install -r requirements/dev.txt
-    flask run
+    flask run --host=0.0.0.0
 
 
 

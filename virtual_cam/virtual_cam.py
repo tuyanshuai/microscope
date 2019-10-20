@@ -28,7 +28,7 @@ def image():
 
     # Generate fake image
     script_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
-    rel_path = "../virtual_cam/image.jpg"
+    rel_path = "image.jpg"
     abs_file_path = os.path.join(script_dir, rel_path)
     im = Image.open(abs_file_path)
     fake_image = im.rotate(math.fmod(time.time() * 5, 360))
