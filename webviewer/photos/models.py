@@ -19,9 +19,9 @@ class Photo(Model):
     user_id = reference_col("users", nullable=True)
     user = relationship("User", backref="photos")
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, photo_path, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, photo_path=photo_path, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""

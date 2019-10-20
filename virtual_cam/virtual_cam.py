@@ -4,12 +4,16 @@ import logging
 import sys
 
 from flask import Flask, render_template, request, Blueprint, send_file
+from flask import flash
 from io import BytesIO
 from PIL import Image
 import time, math, os
+from webviewer.photos.models import Photo
+from webviewer.extensions import (
+    db
+)
 
-blueprint = Blueprint('cam', __name__)
-
+blueprint = Blueprint('virtual_cam', __name__, static_folder="static", static_url_path='/virtual_cam/static')
 
 def serve_pil_image(pil_img):
     img_io = BytesIO()
@@ -19,30 +23,39 @@ def serve_pil_image(pil_img):
 
 
 
-@blueprint.route('/image')
+@blueprint.route('/camera', methods=['GET', 'POST'])
 def image():
-    # qvalue = request.form['q'] # will not use now
 
+    # Generate fake image
     script_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
     rel_path = "../virtual_cam/image.jpg"
     abs_file_path = os.path.join(script_dir, rel_path)
     im = Image.open(abs_file_path)
-    im = im.rotate(math.fmod(time.time()*5,360))
-    return serve_pil_image(im)
+    fake_image = im.rotate(math.fmod(time.time() * 5, 360))
+    if request.method == 'GET':
+        return serve_pil_image(fake_image)
+    else:
+        print("take an action")
+        action = request.args.get('action', '')
+
+        print("action=%s"%action)
+
+        print("request.data=%s"%request.data)
+
+        if action == "snap":
+            url_path = "/virtual_cam/static/%d.jpg" % time.time()
+            img_path = os.path.join(script_dir, "../"+url_path)
+            print (img_path)
+            fake_image.save(img_path) # save image
+            # update database
+            photo = Photo(photo_path=url_path)
+            db.session.add(photo)
+            db.session.commit()
+            retmsg = "Image %s is saved"%url_path
+            return retmsg, 200
+
+        return "unknow action", 200
 
 
-@blueprint.route("/")
-def home():
-    return 'home'
 
-@blueprint.after_request
-def add_header(r):
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
+

@@ -2,7 +2,7 @@
 microscope
 ===============================
 
-smart microscope
+A web-based microscope console
 
 Quickstart
 ----------
@@ -35,19 +35,21 @@ To open the interactive shell, run ::
 
     flask shell
 
-By default, you will have access to the flask ``app``.
-
 
 Running Tests
 --------------------
 
-To run all tests, run ::
+To run all auto tests, run ::
 
     flask test
 
 
-Migrations
+Migrations (If need modify database strucutre, do this)
 ----------
+Init the database: 
+
+    flask db init
+
 
 Whenever a database migration needs to be made. Run the following commands ::
 
