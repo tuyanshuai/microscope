@@ -21,8 +21,8 @@
 
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
-var csrftoken = $('meta[name=csrf-token]').attr('content')
-
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+    var cam_running = 1
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
             if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
@@ -31,6 +31,24 @@ var csrftoken = $('meta[name=csrf-token]').attr('content')
         }
     })
 
+
+  $(document).ready(function(){
+      $("#btn_stop").click(function(){
+
+
+            if(cam_running){
+                $("#microscopyimage").unbind()
+                cam_running = 0
+            }
+            else{
+
+                cam_running = 1
+                $("#microscopyimage").attr("src", "/camera?q="+new Date().getTime());
+                $("#microscopyimage").on('load', function(){$("#microscopyimage").attr("src", "/camera?q="+new Date().getTime())});
+
+            }
+      });
+   });
 
   $(document).ready(function(){
       $("#btn_snap").click(function(){
@@ -42,18 +60,15 @@ var csrftoken = $('meta[name=csrf-token]').attr('content')
 
          });
       });
-});
-</script>
+   });
 
 
-<script type="text/javascript">      
-    $(window).bind("load", function() { 
-        $("#microscopyimage").on('load', function() {
-                $("#microscopyimage").attr("src", "/camera?q="+new Date().getTime());
-                });
-        $("#microscopyimage").attr("src", "/camera?q="+new Date().getTime());
-    });     
+   $("#microscopyimage").on('load', function(){$("#microscopyimage").attr("src", "/camera?q="+new Date().getTime())});
+
+
+
 </script>
+
 
 
 {% endblock %}
