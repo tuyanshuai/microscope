@@ -18,12 +18,11 @@ When we want to Deployment
 ----------
 
 To deploy::
-
-    export FLASK_ENV=production
-    export FLASK_DEBUG=0   
+    cp .env .env.development
+    mv .env.dep .env
     # install apache/ningx
-    # TODO test the app by apache.nginx
-
+    # Serve
+    
 Shell
 -----
 
@@ -40,12 +39,14 @@ To run all auto tests, run ::
     flask test
 
 
-Migrations (If need modify database strucutre, do this)
+Migrations (If modified database  model/strucutre, do this)
 ----------
+Delete Migration template files
+    rm -rf migration
+
 Init the database: 
-
+    
     flask db init
-
 
 Whenever a database migration needs to be made. Run the following commands ::
 
