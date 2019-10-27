@@ -8,15 +8,11 @@ Quickstart
 ----------
 
 Run the following commands to bootstrap your environment ::
-
-    export FLASK_ENV=development
-    export FLASK_DEBUG=1
+  
     git clone https://github.com/tuyanshuai/microscope
     cd microscope
     pip install -r requirements/dev.txt
     flask run --host=0.0.0.0
-
-
 
 When we want to Deployment
 ----------
