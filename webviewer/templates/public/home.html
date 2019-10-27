@@ -4,7 +4,7 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container" style="width: 100%"  align="center">
-        <img id="microscopyimage" style="width: 100%;max-width: 900px;height: auto;top: 5px;" src="/camera?q=">
+        <img id="microscopyimage" style="width: 100%;max-width: 900px;height: auto;top: 5px;" src="/camera/image?q=">
         <br>
         <div class="btn-group" role="group">
         <button class="btn btn-primary" type="button" id="btn_up">↑</button>
@@ -32,27 +32,27 @@
     })
 
 
-  $(document).ready(function(){
-      $("#btn_stop").click(function(){
+<!--  $(document).ready(function(){-->
+<!--      $("#btn_stop").click(function(){-->
 
 
-            if(cam_running){
-                $("#microscopyimage").unbind()
-                cam_running = 0
-            }
-            else{
+<!--            if(cam_running){-->
+<!--                $("#microscopyimage").unbind()-->
+<!--                cam_running = 0-->
+<!--            }-->
+<!--            else{-->
 
-                cam_running = 1
-                $("#microscopyimage").attr("src", "/camera?q="+new Date().getTime());
-                $("#microscopyimage").on('load', function(){$("#microscopyimage").attr("src", "/camera?q="+new Date().getTime())});
+<!--                cam_running = 1-->
+<!--                $("#microscopyimage").attr("src", "/camera/image?q="+new Date().getTime());-->
+<!--                $("#microscopyimage").on('load', function(){$("#microscopyimage").attr("src", "/camera/image?q="+new Date().getTime())});-->
 
-            }
-      });
-   });
+<!--            }-->
+<!--      });-->
+<!--   });-->
 
   $(document).ready(function(){
       $("#btn_snap").click(function(){
-        $.post("camera?action=snap", {action: "snap"}, function(data,status){
+        $.post("camera/image?action=snap", {action: "snap"}, function(data,status){
                    $("#status_info").append(data)
                    setTimeout(function(){
                       $("#status_info").text('');
@@ -62,8 +62,10 @@
       });
    });
 
-
-   $("#microscopyimage").on('load', function(){$("#microscopyimage").attr("src", "/camera?q="+new Date().getTime())});
+    $(document).ready(function(){
+        $("#microscopyimage").on('load', function(){$("#microscopyimage").attr("src", "/camera/image?q="+new Date().getTime())});
+        $("#microscopyimage").attr("src", "/camera/image?q="+new Date().getTime())
+   });
 
 
 

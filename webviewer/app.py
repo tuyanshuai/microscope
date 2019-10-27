@@ -17,7 +17,8 @@ from webviewer.extensions import (
     webpack,
 )
 
-from virtual_cam import virtual_cam
+from camera import camera
+from motors import motors
 
 def create_app(config_object="webviewer.settings"):
     """Create application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
@@ -32,6 +33,9 @@ def create_app(config_object="webviewer.settings"):
     register_shellcontext(app)
     register_commands(app)
     configure_logger(app)
+    csrf_protect.exempt(camera.blueprint) # debug only NOTICE:
+    csrf_protect.exempt(motors.blueprint)  # debug only NOTICE:
+
     return app
 
 
@@ -53,9 +57,8 @@ def register_blueprints(app):
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(photos.views.blueprint)
-
-    app.register_blueprint(virtual_cam.blueprint)
-
+    app.register_blueprint(camera.blueprint)
+    app.register_blueprint(motors.blueprint)
 
     return None
 
@@ -95,3 +98,5 @@ def configure_logger(app):
     handler = logging.StreamHandler(sys.stdout)
     if not app.logger.handlers:
         app.logger.addHandler(handler)
+
+
